@@ -65,15 +65,19 @@ If any of the functions return non-nil, `redact-mode-function' is not called."
         (overlay-put overlay 'display cache)
       (redact-region (overlay-start overlay) (overlay-end overlay)))))
 
+;;;###autoload
 (defun redact-region (beg end)
   "Redact BEG to END via `redaction-function'."
+  (interactive (list (point) (mark)))
   (when redaction-function
     (let ((cache (funcall redaction-function (buffer-substring beg end))))
       (redact--overlay beg end 'redacted t 'display cache 'redact-cache cache
                        'reveal-toggle-invisible #'redact--toggle))))
 
+;;;###autoload
 (defun redact-unredact-region (beg end)
   "Remove redaction overlays from region BEG to END."
+  (interactive "r")
   (mapc (lambda (o) (when (overlay-get o 'redacted) (delete-overlay o)))
         (overlays-in beg end)))
 
