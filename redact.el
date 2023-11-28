@@ -28,6 +28,7 @@
 (defgroup redact nil "Redact buffer text." :group 'applications :prefix "redact-")
  ;;@MAYBE: some of these user options should have setters which recompute redactions
 (defcustom redact-replacement ?* "Replacement used by `redact-string'."
+(defcustom redact-replacement "*" "Replacement used by `redact-string'."
   :type '(choice string function))
 (defcustom redaction-function #'redact-string
   "Unary function which must take a string and return a redacted string."
