@@ -42,12 +42,14 @@
   "Abnormal hook run during `post-command-hook'.
 If any of the functions return non-nil, `redact-mode-function' is not called."
   :type 'function)
+(defcustom redact-string-regexp "[^[:space:]\\|\n]" "Regexp used in `redact-string'."
+  :type 'regexp)
 
 (defun redact-string (string)
   "Replace STRING's chars with `redact-replacement'."
   (if (characterp redact-replacement)
       (make-string (length string) redact-replacement)
-    (replace-regexp-in-string "." redact-replacement string)))
+    (replace-regexp-in-string redact-string-regexp redact-replacement string)))
 
 (defun redact--overlay (beg end &rest props)
   "Return overlay from BEG to END with PROPS."
