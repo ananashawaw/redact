@@ -66,7 +66,7 @@ If any of the functions return non-nil, `redact-mode-function' is not called."
       (redact-region (overlay-start overlay) (overlay-end overlay)))))
 
 (defun redact-region (beg end)
-  "Redact BEG to END via `redact-function'."
+  "Redact BEG to END via `redaction-function'."
   (when redaction-function
     (let ((cache (funcall redaction-function (buffer-substring beg end))))
       (redact--overlay beg end 'redacted t 'display cache 'redact-cache cache
