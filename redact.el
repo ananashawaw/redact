@@ -84,7 +84,7 @@ If any of the functions return non-nil, `redact-mode-function' is not called."
 (defmacro redact-window (&rest body)
   "Eval BODY with point at `window-start'.
 `window-start' and `window-end' are bound to `start` and `end`."
-  (declare (debug 1))
+  (declare (debug t))
   `(save-excursion (let ((start (window-start))
                          (end (window-end)))
                      (redact-unredact-region start end)
